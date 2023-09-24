@@ -1,5 +1,6 @@
 class Solution {
-    public boolean isPowerOfFour(int n) {
+public:
+    bool isPowerOfFour(int n) {
         if(n<=0){
             return false;
         }
@@ -14,4 +15,4 @@ class Solution {
             return false;
         }
     }
-}
+};
