@@ -1,0 +1,15 @@
+class Solution {
+public:
+    char findTheDifference(string s, string t) {
+        int sum1 = 0;
+        int sum2 = 0;
+        for(int i=0;i<t.length();i++){
+            sum1 = sum1 + t[i];
+        }
+        for(int i=0;i<s.length();i++){
+            sum2 = sum2 + s[i];
+        }
+        char ans = sum1-sum2;
+        return ans;
+    }
+};
