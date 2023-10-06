@@ -1,0 +1,41 @@
+class Solution {
+public:
+    string toLowerCase(string str) {
+        int i = 0;
+        while (str[i] != '\0') {
+            char ch = str[i];
+            if (ch >= 'A' && ch <= 'Z') {
+                ch = ch - 'A' + 'a';
+                str[i] = ch;
+            }
+            i++;
+        }
+        return str;
+    }
+
+    bool isPalindrome(string s) {
+        int start = 0;
+        int end = s.length() - 1;
+        s = toLowerCase(s);
+        while (start < end) {
+            if (s[start] >= '0' && s[start] <= '9' || s[start] >= 'a' && s[start] <= 'z') {
+                if (s[end] >= '0' && s[end] <= '9' || s[end] >= 'a' && s[end] <= 'z') {
+                    if (s[start] != s[end]) {
+                        return false;
+                    }
+                    end--;
+                    start++;
+                }
+                else {
+                    end--;
+                }
+            }
+            else {
+                start++;
+            }
+        }
+        return true;
+    }
+    
+};
+
