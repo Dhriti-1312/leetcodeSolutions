@@ -1,0 +1,33 @@
+class Solution {
+public:
+    void split(string& s, int& re, int& im){
+        int l = s.length();
+        int i=0;
+        string t1 = "", t2 = "";
+        while(i<l && s[i] != '+'){
+            t1 += s[i];
+            i++;
+        }
+        i++;
+        re = stoi(t1);
+
+        while(i<l && s[i] != 'i'){
+            t2 += s[i];
+            i++;
+        }
+        im = stoi(t2);
+    }
+    string complexNumberMultiply(string num1, string num2) {
+        int re1, im1, re2, im2, re, im;
+        split(num1,re1,im1);
+        split(num2,re2,im2);
+        re = (re1*re2 - im1*im2);
+        im = (re1*im2 + im1*re2);
+
+        string s1, s2, s="";
+        s1 = to_string(re);
+        s2 = to_string(im);
+        s = s1 + '+' + s2 + 'i';
+        return s;
+    }
+};
