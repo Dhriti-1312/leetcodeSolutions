@@ -1,0 +1,16 @@
+class Solution {
+public:
+    int findDuplicate(vector<int>& nums) {
+        unordered_map<int,int> p;
+
+        for(int i : nums){
+            if(p.find(i) != p.end()){
+                return i;
+            }
+            else{
+                p.insert({i,1});
+            }
+        }
+        return -1;
+    }
+};
