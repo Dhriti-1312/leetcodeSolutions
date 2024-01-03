@@ -1,0 +1,26 @@
+class Solution {
+public:
+    int devicesInithRow(vector<string>& bank,int& i){
+        int cnt = 0;
+        for(int j=0;j<bank[i].size();j++){
+            if(bank[i][j]=='1'){
+                cnt++;
+            }
+        }
+        return cnt;
+    }
+    int numberOfBeams(vector<string>& bank) {
+        int total = 0;
+        int prevCount = 0;
+        for(int i=0;i<bank.size();i++){
+            int currCount = devicesInithRow(bank,i);
+            if(currCount==0){
+                continue;
+            }
+            total = total + currCount*prevCount;
+            prevCount = currCount;
+            
+        }
+        return total;
+    }
+};
