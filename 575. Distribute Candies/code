@@ -1,0 +1,23 @@
+class Solution {
+    public int distributeCandies(int[] candyType) {
+        int n = candyType.length;
+        HashMap<Integer,Integer> m = new HashMap<>();
+        for(int i=0;i<n;i++){
+            if(m.containsKey(candyType[i])){
+                m.put(candyType[i],m.get(candyType[i])+1);
+            }
+            else{
+                m.put(candyType[i],1);
+            }
+        }
+        int eat = n/2;
+        int type = m.size();
+
+        if(eat >= type){ 
+            return type;
+        }
+        else{
+            return eat;
+        }
+    }
+}
