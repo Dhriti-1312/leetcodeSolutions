@@ -1,0 +1,34 @@
+class Solution {
+public:
+    void solve(ListNode* head){
+        if(head == NULL || head->next == NULL){
+            return;
+        }
+        ListNode* slow = head;
+        ListNode* fast = head->next;
+        stack<int> st2;
+        while(fast != NULL && fast->next != NULL){
+            slow = slow->next;
+            fast = fast->next->next;
+        }
+        
+        ListNode* demo = slow->next;
+        while(demo != NULL){
+            st2.push(demo->val);
+            demo = demo->next;
+        }
+        slow->next  = NULL;
+        ListNode* temp = head;
+        while(!st2.empty()){
+            ListNode* fwd = temp->next;
+            temp->next = new ListNode(st2.top());
+            st2.pop();
+            temp->next->next = fwd;
+            temp = fwd;
+        }
+
+    }
+    void reorderList(ListNode* head) {
+        solve(head);
+    }
+};
