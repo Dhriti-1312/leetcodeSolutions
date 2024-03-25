@@ -1,0 +1,38 @@
+class Solution {
+public:
+    ListNode* detectLoop(ListNode* head)
+    {
+        if(head==NULL || head->next==NULL){
+            return NULL;
+        }
+        // your code here
+        ListNode* slow = head->next;
+        ListNode* fast = head->next->next;
+        
+        while(fast != NULL && fast->next != NULL){
+            if(fast==slow){
+                return slow;
+            }
+            fast = fast->next->next;
+            
+            slow = slow->next;
+        }
+        return NULL;
+    }
+    ListNode *detectCycle(ListNode *head) {
+        if(head==NULL){
+            return head;
+        }
+        ListNode* intersection = detectLoop(head);
+        if(intersection){
+            ListNode* slow = head;
+            while(slow != intersection){
+                slow = slow->next;
+                intersection = intersection->next;
+            }
+            return slow;
+        }
+
+        return NULL;
+    }
+};
