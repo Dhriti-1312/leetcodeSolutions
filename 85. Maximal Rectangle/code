@@ -1,0 +1,81 @@
+class Solution {
+public:
+    vector<int> nextSmallerElement(vector<int> &arr, int n)
+    {
+        stack<int> st;
+        st.push(-1);
+        vector<int> ans(n);
+
+        for(int i=n-1;i>=0;i--){
+            int curr = arr[i];
+            while(st.top()!=-1 && arr[st.top()]>=curr){
+                st.pop();
+            }
+
+            //ans is stack ka top
+            ans[i]=st.top();
+            st.push(i);
+        }
+            return ans;
+    }
+    vector<int> prevSmallerElement(vector<int> &arr, int n)
+    {
+        stack<int> st;
+        st.push(-1);
+        vector<int> ans(n);
+
+        for(int i=0;i<n;i++){
+            int curr = arr[i];
+            while(st.top()!=-1 && arr[st.top()]>=curr){
+                st.pop();
+            }
+
+            //ans is stack ka top
+            ans[i]=st.top();
+            st.push(i);
+        }
+        return ans;
+    }
+
+    int largestRectangleArea(vector<int>& heights) {
+        
+        int n = heights.size();
+        
+        vector<int> ps(n);
+        ps = prevSmallerElement(heights,n);
+        
+        vector<int> ns(n);
+        ns = nextSmallerElement(heights,n);
+
+        int area = INT_MIN;
+        for(int i=0;i<n;i++){
+            int l  = heights[i];
+
+            if(ns[i]==-1){
+                ns[i]=n;
+            }
+
+            int b = ns[i]-ps[i]-1;
+            int newArea = l*b;
+
+            area = max(area,newArea);
+        }
+        return area;
+    }
+    int maximalRectangle(vector<vector<char>>& matrix) {
+        int maxi = INT_MIN;
+        vector<int> height(matrix[0].size(),0);
+        for(int i=0;i<matrix.size();i++){
+            for(int j=0;j<height.size();j++){
+                if(matrix[i][j]=='1'){
+                    height[j]++;
+                }
+                else{
+                    height[j] = 0;
+                }
+            }
+            maxi = max(maxi,largestRectangleArea(height));
+        }
+        return maxi;
+    }
+};
