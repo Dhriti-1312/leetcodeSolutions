@@ -1,0 +1,30 @@
+class Solution {
+public:
+    int solveMem(int i,int j,vector<vector<int>>& grid,vector<vector<int>>& dp){
+        int m = grid.size();
+        int n = grid[0].size();
+
+        if(i==m-1 && j==n-1){
+            return grid[i][j];
+        }
+        if(i>=m || j>=n){
+            return INT_MAX;
+        }
+        if(dp[i][j] != -1){
+            return dp[i][j];
+        }
+        int ans = 0;
+        //down
+        int down = solveMem(i+1,j,grid,dp);
+
+        //right
+        int right = solveMem(i,j+1,grid,dp);
+        ans = grid[i][j] + min(down,right);
+        return dp[i][j] = ans;
+        
+    }
+    int minPathSum(vector<vector<int>>& grid) {
+        vector<vector<int>> dp(grid.size(),vector<int> (grid[0].size(),-1));
+        return solveMem(0,0,grid,dp);
+    }
+};
