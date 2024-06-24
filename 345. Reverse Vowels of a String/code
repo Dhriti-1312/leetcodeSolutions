@@ -1,0 +1,23 @@
+class Solution {
+public:
+    string reverseVowels(string s) {
+        int i = 0;
+        int j = s.length()-1;
+        vector<char> arr = {'a','e','i','o','u','A','E','I','O','U'};
+        while(i<=j){
+            if((find(arr.begin(),arr.end(),s[i]) != arr.end()) && (find(arr.begin(),arr.end(),s[j]) != arr.end())){
+                swap(s[i],s[j]);
+                i++;
+                j--;
+            }
+            else if((find(arr.begin(),arr.end(),s[i]) != arr.end()) && (find(arr.begin(),arr.end(),s[j]) == arr.end())){
+                j--;
+            }
+            else{
+                i++;
+            }
+        }
+        return s;
+
+    }
+};
