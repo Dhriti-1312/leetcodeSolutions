@@ -1,0 +1,72 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+class Solution {
+public:
+    TreeNode* lca(TreeNode* root,int p,int q){
+        if(root==NULL){
+            return NULL;
+        }
+        if(root->val==p || root->val==q){
+            return root;
+        }
+
+        TreeNode* leftAns = lca(root->left,p,q);
+        TreeNode* rightAns = lca(root->right,p,q);
+
+        if(leftAns != NULL && rightAns != NULL){
+            return root;
+        }
+        else if(leftAns != NULL && rightAns == NULL){
+            return leftAns;
+        }
+        else if(leftAns == NULL && rightAns != NULL){
+            return rightAns;
+        }
+        else{
+            return NULL;
+        }
+    }
+    bool findPath(TreeNode* root,int value,string &path){
+        if(root==NULL){
+            return false;
+        }
+        if(root->val==value){
+            return true;
+        }
+
+        if(findPath(root->left,value,path)){
+            path += 'L';
+            return true;
+        }
+        if(findPath(root->right,value,path)){
+            path += 'R';
+            return true;
+        }
+        return false;
+    }
+    string getDirections(TreeNode* root, int startValue, int destValue) {
+        TreeNode* lcaAns = lca(root,startValue,destValue);
+
+        string toStart = "";
+        string toDest = "";
+
+        findPath(lcaAns,startValue,toStart);
+        findPath(lcaAns,destValue,toDest);
+
+        for(char &c : toStart){
+            c = 'U';
+        }
+
+        reverse(toDest.begin(),toDest.end());
+        return toStart + toDest;
+    }
+};
