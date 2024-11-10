@@ -1,0 +1,26 @@
+class Solution {
+public:
+    bool isSubstring(string str,string goal){
+        int n = str.length();
+        int m = goal.length();
+        for(int i=0;i<=n-m;i++){
+            int j;
+            for(j=0;j<m;j++){
+                if(str[i+j] != goal[j]){
+                    break;
+                }
+            }
+            if(j==m){
+                return true;
+            }
+        }
+        return false;
+    }
+    bool rotateString(string s, string goal) {
+        if(goal.length() != s.length()){
+            return false;
+        }
+        string str = s + s;
+        return isSubstring(str,goal);        
+    }
+};
