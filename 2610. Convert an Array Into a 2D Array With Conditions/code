@@ -1,0 +1,25 @@
+class Solution {
+public:
+    vector<vector<int>> findMatrix(vector<int>& nums) {
+        vector<vector<int>> ans;
+        unordered_map<int,int> m;
+        for(int i=0;i<nums.size();i++){
+            m[nums[i]]++;
+        }
+        int maxRows = -1;
+        for(const auto& i : m){
+            maxRows = max(maxRows,i.second);
+        }
+
+        ans.resize(maxRows);
+        for(const auto& i : m){
+            int val = i.first;
+            int freq = i.second;
+
+            for(int j=0;j<freq;j++){
+                ans[j].push_back(val);
+            }
+        }
+        return ans;
+    }
+};
