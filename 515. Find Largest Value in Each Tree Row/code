@@ -19,11 +19,11 @@ public:
 
         queue<TreeNode*> q;
         q.push(root);
-        q.push(NULL);
 
         while(!q.empty()){
             int maxi = INT_MIN;
-            while(q.front() != NULL){
+            int size = q.size();
+            for(int i=0;i<size;i++){
                 TreeNode* temp = q.front();
                 q.pop();
 
@@ -36,11 +36,7 @@ public:
                     q.push(temp->right);
                 }
             }
-            q.pop();
             arr.push_back(maxi);
-            if(!q.empty()){
-                q.push(NULL);
-            }
         }
         return arr;
     }
