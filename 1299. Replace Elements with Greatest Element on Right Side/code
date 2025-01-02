@@ -1,0 +1,19 @@
+class Solution {
+public:
+    int findMax(vector<int>& arr,int s,int e){
+        int maxi = INT_MIN;
+        for(int i=s;i<=e;i++){
+            maxi = max(maxi,arr[i]);
+        }
+        return maxi;
+    }
+    vector<int> replaceElements(vector<int>& arr) {
+        vector<int> ans;
+        for(int i=0;i<arr.size()-1;i++){
+            int maxi = findMax(arr,i+1,arr.size()-1);
+            ans.push_back(maxi);
+        }
+        ans.push_back(-1);
+        return ans;
+    }
+};
