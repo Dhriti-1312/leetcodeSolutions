@@ -1,0 +1,20 @@
+class Solution {
+public:
+    bool checkString(string s) {
+        int indexA = -1;
+        int indexB = -1;
+        for(int i=0;i<s.size();i++){
+            if(s[i]=='a'){
+                indexA = i;
+            }
+            if(s[i]=='b'){
+                indexB = i;
+            }
+
+            if(indexB<indexA && indexB !=-1 && indexA!=-1){
+                return false;
+            }
+        }
+        return true;
+    }
+};
