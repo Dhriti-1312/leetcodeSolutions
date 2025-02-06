@@ -1,0 +1,21 @@
+class Solution {
+public:
+    int tupleSameProduct(vector<int>& nums) {
+        unordered_map<int,int> m;
+
+        for(int i=0;i<nums.size();i++){
+            for(int j=i+1;j<nums.size();j++){
+                int pro = nums[i]*nums[j];
+                m[pro]++;
+            }
+        }
+
+        int cnt=0;
+        for(const auto&p : m){
+            if(p.second>1){
+                cnt += (p.second * (p.second-1))/2;
+            }
+        }
+        return cnt*8;
+    }
+};
