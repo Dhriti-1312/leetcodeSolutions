@@ -1,0 +1,29 @@
+class Solution {
+public:
+    void solve(string tiles,unordered_map<char,int> &m,int &cnt){
+        for(auto& [ch,f] : m){
+            if(f>0){
+                m[ch]--;
+                cnt++;
+
+                solve(tiles,m,cnt);
+
+                m[ch]++;
+            }
+        }
+    }
+    int numTilePossibilities(string tiles) {
+        if(tiles.size()==1){
+            return 1;
+        }
+
+        unordered_map<char,int> m;
+        for(auto& ch : tiles){
+            m[ch]++;
+        }
+        int cnt=0;
+        solve(tiles,m,cnt);
+        return cnt;
+
+    }
+};
