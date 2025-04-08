@@ -1,0 +1,33 @@
+class Solution {
+public:
+    bool unique(int i,vector<int>& nums){
+        unordered_map<int,int> m;
+
+        for(int j=i;j<nums.size();j++){
+            m[nums[j]]++;
+            if(m[nums[j]]>1){
+                return false;
+            }
+        }
+        return true;
+    }
+    int minimumOperations(vector<int>& nums) {
+        if(nums.size()==0){
+            return 0;
+        }
+        int cnt = 0;
+
+        int i=0;
+        while(i<nums.size()){
+            if(unique(i,nums)){
+                break;
+                return cnt;
+            }
+            else{
+                i += 3;
+                cnt++;
+            }
+        }
+        return cnt;
+    }
+};
