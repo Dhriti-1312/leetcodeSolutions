@@ -1,0 +1,29 @@
+class Solution {
+public:
+    int numEquivDominoPairs(vector<vector<int>>& dominoes) {
+        if(dominoes.size()==0){
+            return 0;
+        }
+        
+        int cnt = 0;
+        unordered_map<int,int> m;
+        
+    
+        for(int i=0;i<dominoes.size();i++){
+            int a = dominoes[i][0];
+            int b = dominoes[i][1];
+            int key = min(a,b)*10 + max(a,b);
+            
+            if(m.find(key)!=m.end()){
+                cnt += m[key];
+                m[key]++;
+            }
+            else{
+                m[key]=1;
+            }
+            
+        }
+
+        return cnt;
+    }
+};
