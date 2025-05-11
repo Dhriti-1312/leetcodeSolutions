@@ -1,0 +1,38 @@
+class Solution {
+public:
+    bool cycleCheckDFS(int i,int numCourses, vector<vector<int>>& adj,vector<int>& vis,vector<int>& pathVis){
+        vis[i] = 1;
+        pathVis[i] = 1;
+
+        for(auto neighbor : adj[i]){
+            if(!vis[neighbor]){
+                if(cycleCheckDFS(neighbor,numCourses,adj,vis,pathVis)){
+                    return true;
+                }
+            }
+            else if(pathVis[neighbor]){
+                return true;
+            }
+        }
+        pathVis[i] = 0;
+        return false;
+    }
+    bool canFinish(int numCourses, vector<vector<int>>& prerequisites) {
+        vector<vector<int>> adj(numCourses);
+        for(auto& pre : prerequisites){
+            adj[pre[1]].push_back(pre[0]);
+        }
+        
+        vector<int> vis(numCourses,0);
+        vector<int> pathVis(numCourses,0);
+
+        for(int i=0;i<numCourses;i++){
+            if(!vis[i]){
+                if(cycleCheckDFS(i,numCourses,adj,vis,pathVis)){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+};
