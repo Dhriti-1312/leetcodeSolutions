@@ -1,0 +1,14 @@
+void dfs(int i,vector<vector<int>>& rooms,unordered_map<int,bool> &visited){
+        visited[i] = true;
+        for(auto j : rooms[i]){
+            if(!visited[j]){
+                dfs(j,rooms,visited);
+            }
+        }
+    }
+    bool canVisitAllRooms(vector<vector<int>>& rooms) {
+        unordered_map<int,bool> visited;
+        dfs(0,rooms,visited);
+
+        return rooms.size()==visited.size();
+    }
