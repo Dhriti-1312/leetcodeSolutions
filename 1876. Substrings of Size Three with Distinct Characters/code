@@ -1,0 +1,19 @@
+class Solution {
+public:
+    int countGoodSubstrings(string s) {
+        int cnt = 0;
+        if(s.size()<3){
+            return 0;
+        }
+        for(int i=0;i<s.size()-2;i++){
+            unordered_set<char> m;
+            m.insert(s[i]);
+            m.insert(s[i+1]);
+            m.insert(s[i+2]);
+            if(m.size()==3){
+                cnt++;
+            }
+        }
+        return cnt;
+    }
+};
