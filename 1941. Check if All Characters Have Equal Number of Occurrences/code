@@ -1,0 +1,16 @@
+class Solution {
+public:
+    bool areOccurrencesEqual(string s) {
+        unordered_map<char,int> m;
+        for(char ch : s){
+            m[ch]++;
+        }
+        int k = m[s[0]];
+        for(auto i : m){
+            if(i.second!=k){
+                return false;
+            }
+        }
+        return true;
+    }
+};
