@@ -1,0 +1,22 @@
+class Solution {
+public:
+    vector<string> partitionString(string s) {
+        vector<string> ans;
+        unordered_set<string> m;
+        int i=0;
+        int n = s.size();
+        
+        string temp = "";
+        while(i<n){
+            temp += s[i];
+            if(m.find(temp)==m.end()){
+                m.insert(temp);
+                ans.push_back(temp);
+                temp="";
+            }
+            i++;
+        }
+        return ans;
+            
+    }
+};
