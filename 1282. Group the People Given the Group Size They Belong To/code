@@ -1,0 +1,25 @@
+class Solution {
+public:
+    vector<vector<int>> groupThePeople(vector<int>& groupSizes) {
+        vector<vector<int>> ans;
+        unordered_map<int,vector<int>> m;
+        int n = groupSizes.size();
+        for(int i=0;i<n;i++){
+            m[groupSizes[i]].push_back(i);
+        }
+
+        for(auto &i : m){
+            int x = i.second.size();
+            int groups = x/i.first;
+            vector<int> temp;
+            for(int j=0;j<x;j++){
+                temp.push_back(i.second[j]);
+                if(temp.size()==i.first){
+                    ans.push_back(temp);
+                    temp.clear();
+                }
+            }
+        }
+        return ans;
+    }
+};
